@@ -1,14 +1,16 @@
 # Page 3's algorithm.
-# Was broken for a long time because I always forget 
-# that Ruby rounds your int math. Fuck.
-# Still seems wrong. Something smells fishy.
+# Was broken for a long time making checkerboards because 
+# I always forget how much Ruby rounds your int math. Fuck.
+
+# Try a lowish "side" number, say, 18, and move the window
+# for some low-budget psychedelia.
 
 require 'ruby-processing'
 
 class Wallpaper1 < Processing::App
-  has_slider :corna
-  has_slider :cornb
-  has_slider :side
+  has_slider :corna, 0...100
+  has_slider :cornb, 0...100
+  has_slider :side, 0...1000
 
   def setup
     color_mode RGB, 1.0
@@ -28,7 +30,7 @@ class Wallpaper1 < Processing::App
     @i += 1
     300.times do |j|
       x = (@corna + @i.to_f) * @side / 300.0
-      y = (@corna + j.to_f) * @side / 300.0
+      y = (@cornb + j.to_f) * @side / 300.0
       c = ((x*x) + (y*y)).to_i
       point(j, @i) if c % 2 == 0
     end
