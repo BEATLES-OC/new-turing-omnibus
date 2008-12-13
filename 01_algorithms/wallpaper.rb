@@ -8,9 +8,7 @@
 require 'ruby-processing'
 
 class Wallpaper1 < Processing::App
-  has_slider :corna, 0...100
-  has_slider :cornb, 0...100
-  has_slider :side, 0...1000
+  load_ruby_library "control_panel"
 
   def setup
     color_mode RGB, 1.0
@@ -22,13 +20,19 @@ class Wallpaper1 < Processing::App
     @cornb = 10.0
     @side = 20.0
     
+    control_panel do |c|
+      c.slider :corna, 0..100
+      c.slider :cornb, 0..100
+      c.slider :side,  0..1000
+    end
+    
     @i = 0
   end
   
   def draw
     return if @i > 300
     @i += 1
-    300.times do |j|
+    width.times do |j|
       x = (@corna + @i.to_f) * @side / 300.0
       y = (@cornb + j.to_f) * @side / 300.0
       c = ((x*x) + (y*y)).to_i
