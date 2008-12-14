@@ -14,14 +14,14 @@ class Mandelbrot < Processing::App
     
     @cols, @lines = width, height
     @max_iter = 20
-    @chunks = 1
+    @chunks = 5
     @zoom_factor = 0.45
     
     full_reset
   end
   
   def reset
-    background 255
+    background 0
     @im = @minim
     @y = 0
     @factor = 255 / @max_iter
@@ -48,8 +48,7 @@ class Mandelbrot < Processing::App
   
   def draw
     @chunks.to_i.times do
-    
-      y = (@y += 1)
+      y = @y
       return if y > height
       
       @re = @minre
@@ -68,6 +67,7 @@ class Mandelbrot < Processing::App
       end
       @im += (@maxim-@minim)/@lines
       
+      @y += 1
     end
   end
   
